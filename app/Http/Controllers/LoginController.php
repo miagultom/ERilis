@@ -50,19 +50,24 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $credentials = $request-> validate([
+        $login = $request->validate([
             'username' => 'required',
-            'password' => 'required|minimal 6'
+            'password' => 'required|min:5'
         ]);
 
-        if(Auth::attempt($credentials)){
-            $request->session()->regenerate();
+        // dd('login berhasil');
 
-            return redirect()->intended('/dashboard');
+        if (Auth::attempt($login)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/user/dashboard');
         }
 
         return back()->with('loginError', 'Login Gagal!');
+    }
 
+    public function prosesLogout(Request $request)
+    {
+        $request->session()->flush();
+        return redirect('/');
     }
 }
-
