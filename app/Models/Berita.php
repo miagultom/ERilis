@@ -10,6 +10,8 @@ class Berita extends Model
     use HasFactory;
     protected $table='berita';
     protected $primaryKey='id';
-    public $incrementing = true;
+    protected $fillable = [
+        'id','judul', 'kategori', 'gambar', 'deskripsi', 'lokasi', 'tanggal', 'author'
+    ];
 
 }

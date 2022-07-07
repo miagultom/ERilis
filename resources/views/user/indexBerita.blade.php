@@ -81,15 +81,15 @@
                                       <td>{{ $no++ }}</td>
                                       <td>{{ $berita->judul}}</td>
                                       <td>{{ $berita->kategori}}</td>
-                                      <td><img src="{{ asset('DataWisata/') }}/{{ $berita->gambar }}" alt="" style="width: 100px"></td>
+                                      <td><img src="{{ asset('Berita/') }}/{{ $berita->gambar }}" alt="" style="width: 100px"></td>
                                       <td>{{ Str::limit ($berita->deskripsi, 50) }}</td>
                                       <td>{{ $berita->lokasi }}</td>
-                                      <td>{{ $berita->tanggal}}</td>
+                                      <td>{{date('d-m-Y', strtotime($berita->tanggal))}}</td>
                                       <td>{{ $berita->author}}</td>
                                       <td>
-                                          <a href="/Berita/Detail/{{$berita->id}}" class="btn btn-primary btn-sm">Detail</a>
-                                          <a href="/Berita/Edit/{{$berita->id}}" class="btn btn-warning btn-sm">Edit</a>
-                                          <a href="/Berita/Delete/{{$berita->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Hapus</a>
+                                          <a href="/user/detail/{{$berita->id}}" class="btn btn-primary btn-sm">Detail</a>
+                                          <a href={{ url('/user/edit', + $berita->id) }} class="btn btn-warning btn-sm">Edit</a>
+                                          <a href="/user/delete/{{$berita->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Hapus</a>
                                       </td>
                                      </tr>
                                       @endforeach
@@ -104,5 +104,7 @@
     </section>
 </div>
 @include('layouts.footer')
+
+@include('sweetalert::alert')
 </body> 
 </html>

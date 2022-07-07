@@ -39,10 +39,6 @@ Route::get('/user/berita', [BeritaController::class, 'index']);
 Route::get('/user/create', [BeritaController::class, 'tambahData']);
 Route::post('/user/create/addBerita', [BeritaController::class, 'add'])->name('createdata.addBerita');;
 
-// Route::get('/user/berita', [BeritaController::class, 'indexBerita'])->middleware(CheckSession::class);
-// Route::get('/admin/create', [AdminController::class, 'createDataWisata'])->middleware(CheckSession::class);
-// Route::post('/admin/crete/addWisata', [AdminController::class, 'addWisata'])->name('createdata.addWisata')->middleware(CheckSession::class);
-// Route::get('/Wisata/Detail/{id}', [AdminController::class, 'detailWisata'])->middleware(CheckSession::class);
-// Route::get('/Wisata/Edit/{id}', [AdminController::class, 'editWisata'])->middleware(CheckSession::class);
-// Route::post('Wisata/Update/{id}', [AdminController::class, 'updateWisata'])->name('updatedataWisata.addWisata')->middleware(CheckSession::class);
-// Route::get('/Wisata/Delete/{id}', [AdminController::class, 'deleteWisata'])->name('deletedata.addWisata')->middleware(CheckSession::class);
+Route::get('/user/edit/{id}', [BeritaController::class, 'editData']);
+Route::post('/user/update/{id}', [BeritaController::class, 'update']);
+Route::get('/user/delete/{id}', [BeritaController::class, 'delete']);

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('gambar')->nullable(true);
             $table->text('deskripsi')->nullable(true);
             $table->string('lokasi', 200)->nullable(true);
-            $table->dateTime('tanggal')->nullable(true);
+            $table->date('tanggal')->nullable(true);
             $table->string('author')->nullable(true);
             $table->timestamps();
         });
