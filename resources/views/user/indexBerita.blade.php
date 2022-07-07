@@ -11,7 +11,6 @@
 @include('layouts.header')
 
 @section('content')
-
 <div class="content-wrapper">
     <section class="content-header">
         <div class="container-fluid">
@@ -28,29 +27,6 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    @if($errors->any())
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                        <ul>
-                            foreach ($errors->all() as $message) {
-                            <li>{{ $message }}</li>
-                            }
-                        </ul>
-                    </div>
-                    @endif
-
-                    @if (session('status') == 'Success')
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <h5><i class="icon fas fa-check"></i> Alert!</h5>
-                        {{ session('message') }}
-                    </div>
-                    @endif
-                </div>
-            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -73,38 +49,52 @@
                                       <th scope="col">Aksi</th>
                                     </tr>
                                   </thead>
-                          
-                                  <tbody>
-                                      <?php $no = 1;?>
-                                      @foreach ($model_Berita as $berita)
-                                     <tr>
-                                      <td>{{ $no++ }}</td>
-                                      <td>{{ $berita->judul}}</td>
-                                      <td>{{ $berita->kategori}}</td>
-                                      <td><img src="{{ asset('Berita/') }}/{{ $berita->gambar }}" alt="" style="width: 100px"></td>
-                                      <td>{{ Str::limit ($berita->deskripsi, 50) }}</td>
-                                      <td>{{ $berita->lokasi }}</td>
-                                      <td>{{date('d-m-Y', strtotime($berita->tanggal))}}</td>
-                                      <td>{{ $berita->author}}</td>
-                                      <td>
-                                          <a href="/user/detail/{{$berita->id}}" class="btn btn-primary btn-sm">Detail</a>
-                                          <a href={{ url('/user/edit', + $berita->id) }} class="btn btn-warning btn-sm">Edit</a>
-                                          <a href="/user/delete/{{$berita->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Hapus</a>
-                                      </td>
-                                     </tr>
-                                      @endforeach
-                                  </tbody>
+
+                                  <?php $no = 1;?>
+                                  @foreach ($dtBerita as $index => $item)
+                                  <tr>
+                                    <td scope="row">{{ $index + $dtBerita->firstItem() }}</td>
+                                    <td>{{ $item->judul }}</td>
+                                    <td>{{ $item->kategori }}</td>
+                                    <td><img src="{{ asset('Berita/') }}/{{ $item->gambar }}" alt="" style="width: 50px"></td>
+                                    <td>{{ Str::limit ($item->deskripsi, 60) }}</td>
+                                    <td>{{ $item->lokasi }}</td>
+                                    <td>{{date('d-m-Y', strtotime($item->tanggal)) }}</td>
+                                    <td>{{ $item->author }}</td>
+                                    <td>
+                                        <a href="" class="btn btn-primary btn-sm">Detail</a>
+                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="/user/delete/{{$item->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Hapus</a>
+                                    </td>
+                                  </tr>
+                                  @endforeach
+                                </thead>
                             </table>
+                            <div>
+                                Showing
+                                {{  $dtBerita->firstItem() }} 
+                                to
+                                {{ $dtBerita->lastItem() }} 
+                                of
+                                {{ $dtBerita->total() }}
+                                entires
+                          </div>
+                          <div class="pagination justify-content-end">
+                              {{ $dtBerita->links() }}
+                          </div>
                         </div>
                         <!-- /.card-body -->
+                        
                     </div>
+                    
                 </div>
             </div>
         </div>
     </section>
 </div>
+@include('sweetalert::alert')
+
 @include('layouts.footer')
 
-@include('sweetalert::alert')
 </body> 
 </html>

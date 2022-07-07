@@ -4,9 +4,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\BeritaController;
-use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Route;
-use App\Http\Middleware\CheckSession;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,7 +27,6 @@ Route::get('/', function () {
 
 Route::get('/user/login', [LoginController::class, 'index']);
 Route::post('/user/login', [LoginController::class, 'login']);
-Route::get('/admin/logout', [LoginController::class, 'prosesLogout']);
 
 Route::get('/user/register', [RegisterController::class, 'index']);
 Route::post('/user/register', [RegisterController::class, 'register']);
@@ -36,9 +34,7 @@ Route::post('/user/register', [RegisterController::class, 'register']);
 Route::get('/user/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/user/berita', [BeritaController::class, 'index']);
-Route::get('/user/create', [BeritaController::class, 'tambahData']);
-Route::post('/user/create/addBerita', [BeritaController::class, 'add'])->name('createdata.addBerita');;
+Route::get('/user/create', [BeritaController::class, 'create']);
+Route::post('/user/create/addBerita', [BeritaController::class, 'store']);
 
-Route::get('/user/edit/{id}', [BeritaController::class, 'editData']);
-Route::post('/user/update/{id}', [BeritaController::class, 'update']);
-Route::get('/user/delete/{id}', [BeritaController::class, 'delete']);
+Route::get('user/delete/{id}', [BeritaController::class, 'delete']);

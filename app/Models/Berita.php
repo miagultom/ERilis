@@ -11,7 +11,7 @@ class Berita extends Model
     protected $table='berita';
     protected $primaryKey='id';
     protected $fillable = [
-        'id','judul', 'kategori', 'gambar', 'deskripsi', 'lokasi', 'tanggal', 'author'
+        'id','judul', 'kategori', 'gambar', 'deskripsi', 'lokasi', 'tanggal', 'author',
     ];
 
 }

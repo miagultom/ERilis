@@ -20,74 +20,113 @@
                         <!-- /.card-header -->
                         <div class="card-body">
                           <div><h5 class="card-title">Form Tambah Berita</h5></div><br>
-
-                            <form action="{{route('createdata.addBerita')}}"  method="post" id="contact-form" enctype="multipart/form-data">
+                            <form action="{{ url('user/create/addBerita') }}"  method="post" enctype="multipart/form-data">
                                 {{ csrf_field() }}
+
                               <div class="row mb-3">
                                 <label for="judul" class="col-sm-2 col-form-label">Judul</label>
-                                <div class="col-sm-6">
-                                  <input type="text" class="form-control" name="judul">
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" id="judul" placeholder="Judul Berita" value="{{ old('judul') }}">
+                                  @error('judul')
+                                    <div class="invalid-feedback">
+                                      {{ $message }}
+                                    </div>
+                                @enderror
                                 </div>
                               </div>
+
                               <div class="row mb-3">
                                 <label for="kategori" class="col-sm-2 col-form-label">Kategori</label>
-                                <div class="col-sm-6">
-                                  <select class="form-select" aria-label="Default Select Example">
-                                    <option selected>Pilih Kategori</option>
-                                    <option value="Budaya">Budaya</option>
-                                    <option value="Citizen">Citizen</option>
-                                    <option value="Ekonomi">Ekonomi</option>
-                                    <option value="Health">Health</option>
-                                    <option value="Internasional">Internasional</option>
-                                    <option value="Lifestyle">Lifestyle</option>
-                                    <option value="Otomotif">Otomotif</option>
-                                    <option value="Pariwisata">Pariwisata</option>
-                                    <option value="Pemerintahan">Pemerintahan</option>
-                                    <option value="Pendidikan">Pendidikan</option>
-                                    <option value="Peristiwa">Peristiwa</option>
-                                    <option value="Teknologi">Teknologi</option>
-                                  </select>
-                                </div>
-                              </div>  
+                                  <div class="col-sm-10">
+                                    <select class="form-control @error('kategori') is-invalid @enderror" name="kategori" id="kategori">
+                                  <option selected disabled>---Pilih Kategori---</option>
+                                  <option value="Budaya" selected>Budaya</option>
+                                  <option value="Citizen" selected>Citizen</option>
+                                  <option value="Ekonomi" selected>Ekonomi</option>
+                                  <option value="Health" selected>Health</option>
+                                  <option value="Internasional" selected>Internasional</option>
+                                  <option value="Lifestyle" selected>Lifestyle</option>
+                                  <option value="Otomotif" selected>Otomotif</option>
+                                  <option value="Pariwisata" selected>Pariwisata</option>
+                                  <option value="Pemerintahan" selected>Pemerintahan</option>
+                                  <option value="Pendidikan" selected>Pendidikan</option>
+                                  <option value="Peristiwa" selected>Peristiwa</option>
+                                  <option value="Teknologi" selected>Teknologi</option>
+                                </select>
+                                @error('kategori')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                              </div>
+                              </div>
+
                               <div class="row mb-3">
-                                  <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
-                                  <div class="col-sm-6">
-                                    <input class="form-control" type="file" id="formFile" name="gambar">
-                                  </div>
-                                </div> 
+                                <label for="gambar" class="col-sm-2 col-form-label">Gambar</label>
+                                <div class="col-sm-10">
+                                <input class="form-control @error('gambar') is-invalid @enderror" type="file" name="gambar" id="gambar">
+                                @error('gambar')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                              </div> 
+                              </div>
+
                               <div class="row mb-3">
                                 <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
-                                <div class="col-sm-6">
-                                  <textarea class="form-control" id="deskripsi" rows="3" name="deskripsi"></textarea>
-                                </div>
+                                <div class="col-sm-10">
+                                <textarea class="form-control @error('deskripsi') is-invalid @enderror" name="deskripsi" id="deskripsi" cols="30" rows="5" placeholder="Deskripsi" value="{{ old('deskripsi') }}"></textarea>
+                                @error('deskripsi')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                               </div>
+                              </div>
+
                               <div class="row mb-3">
                                 <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
-                                <div class="col-sm-6">
-                                  <input type="text" class="form-control" name="lokasi">
-                                </div>
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" id="lokasi" placeholder="Lokasi Berita" value="{{ old('lokasi') }}">
+                                @error('lokasi')
+                                  <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
                               </div>
+                              </div>
+
                               <div class="row mb-3">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
-                                <div class="col-sm-6">
-                                  <input type="date" class="form-control" name="tanggal">
-                                </div>
-                              </div>  
+                                <div class="col-sm-10">
+                                <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" id="tanggal" placeholder="Tanggal" value="{{ old('tanggal') }}">
+                                @error('tanggal')
+                                  <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                              </div>
+                              </div>
+
                               <div class="row mb-3">
                                 <label for="author" class="col-sm-2 col-form-label">Author</label>
-                                <div class="col-sm-6">
-                                  <input type="text" class="form-control" name="author">
-                                </div>
-                              </div>  
+                                <div class="col-sm-10">
+                                <input type="text" class="form-control @error('author') is-invalid @enderror" name="author" id="author" placeholder="Author" value="{{ old('author') }}">
+                                @error('author')
+                                  <div class="invalid-feedback">{{ $message }}</div>
+                              @enderror
+                              </div> 
+                              </div>
+
+                              <?php
+                                if(isset($_POST['submit'])){
+                                  if(!empty($_POST['kategori'])) {
+                                    $selected = $_POST['kategori'];
+                                    echo 'You have chosen: ' . $selected;
+                                  } else {
+                                    echo 'Please select.';
+                                  }
+                                }
+                              ?>
                                                                     
                               <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label"></label>
                                 <div class="col-sm-6">
-                                    <a href="/user/berita">
-                                  <button type="submit" class="btn btn-primary" href="/user/Berita">Submit Form</button>
-                                    </a>
+                                  <button class="btn btn-primary">Submit Form</button>
                                 </div>
                               </div>
+                              
               
                             </form><!-- End General Form Elements -->
     

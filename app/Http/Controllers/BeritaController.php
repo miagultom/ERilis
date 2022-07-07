@@ -15,65 +15,28 @@ class BeritaController extends Controller
 {
     public function index()
     {
-        $model_Berita = Berita::paginate();
-
-        return view('user.indexBerita')->with([
-            'model_Berita' => $model_Berita,
-        ]);
+        $dtBerita = Berita::paginate(5);
+        return view('user.indexBerita', compact('dtBerita'));
     }
 
-    public function tambahData()
+    public function create()
     {
         return view('user.tambah');
     }
 
-    public function add(Request $request)
+    public function store(Request $request)
     {
-        $model_Berita = new Berita();
-        $user = Auth::user();
+        $this->validate($request,[
+            'judul' => 'required|min:10',
+            'kategori' => 'required',
+            'gambar' => 'required',
+            'deskripsi' => 'required|min:20',
+            'lokasi' => 'required',
+            'author' => 'required',
+            
+        ]);
 
-        $model_Berita->id = $request->id;
-        $model_Berita->judul = $request->judul;
-        $model_Berita->kategori = $request->kategori;
-        $model_Berita->gambar = $request->gambar;
-        $model_Berita->deskripsi = $request->deksripisi;
-        $model_Berita->lokasi = $request->lokasi;
-        $model_Berita->tanggal = $request->tanggal;
-        $model_Berita->author = $request->author;
-
-        if ($model_Berita->save()) {
-            Session::flash('success', 'Data berhasil disimpan');
-        } else {
-            Session::flash('danger', 'Data gagal disimpan');
-        }
-
-        // Berita::created([
-        //     'judul' => $request->judul,
-        //     'kategori' => $request->kategori,
-        //     'deskripsi' => $request->deskripsi,
-        //     'lokasi' => $request->lokasi,
-        //     'tanggal' => $request->tanggal,
-        //     'author' => $request->author,
-        // ]);
-        return redirect('user/berita')->with('toast_success', 'Data Berhasil ditambahkan');;
-    }
-
-    // public function edit($id_objek)
-    // {
-    //     $model_ObjekWisata = ObjekWisata::where('id',id_objek)->first();
-    //     return View('backend') 
-    //     $model_ObjekWisata;
-    // }
-
-    public function editData($id)
-    {
-        $berita= Berita::findorfail($id);
-        return view('user.edit', compact('berita'));
-    }
-    
-    public function update(Request $request)
-    {
-        Berita::where('id', $request->id)->update([
+        $data = Berita::create([
             'judul' => $request->judul,
             'kategori' => $request->kategori,
             'gambar' => $request->gambar,
@@ -82,8 +45,35 @@ class BeritaController extends Controller
             'tanggal' => $request->tanggal,
             'author' => $request->author,
         ]);
-        return redirect('user/berita');
+
+        if ($request->hasFile('gambar')){
+            $request->file('gambar')->move('Berita/', $request->file('gambar')->getClientOriginalName());
+            $data->gambar = $request->file('gambar')->getClientOriginalName();
+            $data->save();
+        }
+
+        return redirect('/user/berita')->with('toast_success', 'Data berhasil disimpan!');
     }
+   
+    //     // public function edit($id_objek)
+    //     // {
+    //     //     $model_ObjekWisata = ObjekWisata::where('id',id_objek)->first();
+    //     //     return View('backend') 
+    //     //     $model_ObjekWisata;
+    //     // }
+
+    //     public function update(Request $request)
+    //     {
+    //         Berita::where('id', $request->id)->update([
+    //             'judul' => $request->judul,
+    //             'kategori' => $request->kategori,
+    //             'deskripsi' => $request->deskripsi,
+    //             'lokasi' => $request->lokasi,
+    //             'tanggal' => $request->tanggal,
+    //             'author' => $request->author,
+    //         ]);
+    //         return redirect('Berita');
+    //     }
 
     public function delete($id)
     {
