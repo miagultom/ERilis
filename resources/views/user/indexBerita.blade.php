@@ -63,7 +63,7 @@
                                     <td>{{ $item->author }}</td>
                                     <td>
                                         <a href="" class="btn btn-primary btn-sm">Detail</a>
-                                        <a href="" class="btn btn-warning btn-sm">Edit</a>
+                                        <a href="/user/edit/{{$item->id}}" class="btn btn-warning btn-sm">Edit</a>
                                         <a href="/user/delete/{{$item->id}}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure want to delete?')">Hapus</a>
                                     </td>
                                   </tr>

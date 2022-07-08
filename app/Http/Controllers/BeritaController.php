@@ -55,25 +55,28 @@ class BeritaController extends Controller
         return redirect('/user/berita')->with('toast_success', 'Data berhasil disimpan!');
     }
    
-    //     // public function edit($id_objek)
-    //     // {
-    //     //     $model_ObjekWisata = ObjekWisata::where('id',id_objek)->first();
-    //     //     return View('backend') 
-    //     //     $model_ObjekWisata;
-    //     // }
+    public function edit($id)
+    {
+        $berita = Berita::findorfail($id);
+       return view('user.edit', compact('berita'));
+    }
 
-    //     public function update(Request $request)
-    //     {
-    //         Berita::where('id', $request->id)->update([
-    //             'judul' => $request->judul,
-    //             'kategori' => $request->kategori,
-    //             'deskripsi' => $request->deskripsi,
-    //             'lokasi' => $request->lokasi,
-    //             'tanggal' => $request->tanggal,
-    //             'author' => $request->author,
-    //         ]);
-    //         return redirect('Berita');
-    //     }
+        public function update(Request $request, $id)
+        {
+            $this->validate($request,[
+                'judul' => 'required|min:10',
+                'kategori' => 'required',
+                'gambar' => 'required',
+                'deskripsi' => 'required|min:20',
+                'lokasi' => 'required',
+                'author' => 'required',
+                
+            ]);
+
+            $berita = Berita::findorfail($id);
+            $berita->update($request->all());
+            return redirect('/user/berita')->with('toast_success', 'Data berhasil diubah!');
+        }
 
     public function delete($id)
     {

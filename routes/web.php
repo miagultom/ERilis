@@ -34,7 +34,11 @@ Route::post('/user/register', [RegisterController::class, 'register']);
 Route::get('/user/dashboard', [DashboardController::class, 'index']);
 
 Route::get('/user/berita', [BeritaController::class, 'index']);
+
 Route::get('/user/create', [BeritaController::class, 'create']);
 Route::post('/user/create/addBerita', [BeritaController::class, 'store']);
+
+Route::get('/user/edit/{id}', [BeritaController::class, 'edit']);
+Route::post('/user/update/{id}', [BeritaController::class, 'update']);
 
 Route::get('user/delete/{id}', [BeritaController::class, 'delete']);
