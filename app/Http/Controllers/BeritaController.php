@@ -57,7 +57,7 @@ class BeritaController extends Controller
    
     public function edit($id)
     {
-        $berita = Berita::findorfail($id);
+        $berita = Berita::find($id);
        return view('user.edit', compact('berita'));
     }
 
@@ -73,8 +73,17 @@ class BeritaController extends Controller
                 
             ]);
 
-            $berita = Berita::findorfail($id);
+            $berita = Berita::find($id);
             $berita->update($request->all());
+            $file = $berita -> gambar;
+            
+            if ($request->hasFile('gambar')){
+                $file= $request->file('gambar')->getClientOriginalName();
+                $request->file('gambar')->move('Berita',$file);
+                $berita -> gambar = $file;
+            } 
+            $berita -> gambar = $file;
+            $berita->save();
             return redirect('/user/berita')->with('toast_success', 'Data berhasil diubah!');
         }
 
@@ -82,5 +91,11 @@ class BeritaController extends Controller
     {
         Berita::where('id', $id)->delete();
         return redirect('user/berita');
+    }
+
+    public function detailBerita(Request $request, $id)
+    {
+        $detail = Berita::find($id);
+        return view('user.detail',compact('detail'));
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -17,13 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('layouts.home');
-});
+// Route::get('/', function () {
+//     return view('layouts.home');
+// });
 
 // Route::get('/', function () {
 //     return view('admin.dashboard');
 // });
+Route::get('/',[UserController::class, 'index']);
+Route::get('/user/detailUser/{id}', [UserController::class, 'detailBerita']);
 
 Route::get('/user/login', [LoginController::class, 'index']);
 Route::post('/user/login', [LoginController::class, 'login']);
@@ -42,3 +44,4 @@ Route::get('/user/edit/{id}', [BeritaController::class, 'edit']);
 Route::post('/user/update/{id}', [BeritaController::class, 'update']);
 
 Route::get('user/delete/{id}', [BeritaController::class, 'delete']);
+Route::get('/user/detail/{id}', [BeritaController::class, 'detailBerita']);

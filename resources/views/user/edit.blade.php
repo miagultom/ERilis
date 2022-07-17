@@ -71,7 +71,7 @@
                               <div class="row mb-3">
                                 <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi</label>
                                 <div class="col-sm-10">
-                                  <textarea class="form-control @error('judul') is-invalid @enderror" id="deskripsi" cols="30" rows="5" placeholder="Deskripsi" name="deskripsi">{{ $berita->deskripsi }}</textarea>
+                                  <textarea class="form-control @error('deskripsi') is-invalid @enderror" id="deskripsi" cols="30" rows="5" placeholder="Deskripsi" name="deskripsi">{{ $berita->deskripsi }}</textarea>
                                   @error('deskripsi')
                                   <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
@@ -80,7 +80,7 @@
                               <div class="row mb-3">
                                 <label for="lokasi" class="col-sm-2 col-form-label">Lokasi</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control @error('judul') is-invalid @enderror" name="lokasi" value="{{ $berita->lokasi }}" placeholder="Lokasi">
+                                  <input type="text" class="form-control @error('lokasi') is-invalid @enderror" name="lokasi" value="{{ $berita->lokasi }}" placeholder="Lokasi">
                                   @error('lokasi')
                                   <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -89,7 +89,7 @@
                               <div class="row mb-3">
                                 <label for="tanggal" class="col-sm-2 col-form-label">Tanggal</label>
                                 <div class="col-sm-10">
-                                  <input type="date" class="form-control @error('judul') is-invalid @enderror" name="tanggal" value="{{ $berita->tanggal }}" placeholder="Tanggal">
+                                  <input type="date" class="form-control @error('tanggal') is-invalid @enderror" name="tanggal" value="{{ $berita->tanggal }}" placeholder="Tanggal">
                                   @error('tanggal')
                                   <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
@@ -98,7 +98,7 @@
                               <div class="row mb-3">
                                 <label for="author" class="col-sm-2 col-form-label">Author</label>
                                 <div class="col-sm-10">
-                                  <input type="text" class="form-control @error('judul') is-invalid @enderror" name="author" value="{{ $berita->author }}" placeholder="Author">
+                                  <input type="text" class="form-control @error('author') is-invalid @enderror" name="author" value="{{ $berita->author }}" placeholder="Author">
                                   @error('author')
                                   <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
