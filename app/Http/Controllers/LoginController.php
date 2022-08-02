@@ -70,4 +70,5 @@ class LoginController extends Controller
         $request->session()->flush();
         return redirect('/');
     }
+    
 }
